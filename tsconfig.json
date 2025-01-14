@@ -1,11 +1,32 @@
 {
-  "files": [],
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
+    "compilerOptions": {
+        "target": "ESNext",
+        "module": "ESNext",
+        "moduleResolution": "node",
+        "strict": true,
+        "jsx": "preserve",
+        "sourceMap": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "baseUrl": ".",
+        "paths": {
+            "@/*": [
+                "src/*"
+            ]
+        },
+        "lib": [
+            "es2020",
+            "dom"
+        ],
+        "skipLibCheck": true
     },
-    {
-      "path": "./tsconfig.app.json"
-    }
-  ]
+    "include": [
+        "config",
+        "env.d.ts",
+        "src/**/*",
+        "src/**/*.vue"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
 }
