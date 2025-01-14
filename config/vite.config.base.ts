@@ -1,7 +1,7 @@
+import {resolve} from 'path';
 import {defineConfig} from "vite";
 import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
-import {fileURLToPath, URL} from "node:url";
 
 export default defineConfig({
     plugins: [
@@ -9,9 +9,12 @@ export default defineConfig({
         vueJsx(),
     ],
     resolve: {
-        alias: {
-            '@': fileURLToPath(new URL('../src', import.meta.url))
-        },
+        alias: [
+            {
+                find: '@',
+                replacement: resolve(__dirname, '../src'),
+            },
+        ]
     },
     server: {
         host: '0.0.0.0'
