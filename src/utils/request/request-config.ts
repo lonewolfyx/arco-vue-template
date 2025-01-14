@@ -7,7 +7,7 @@ export interface RequestConfig {
 
 export default <RequestConfig>{
     // axios 请求队列限制数量
-    requestLimit: 2,
+    requestLimit: import.meta.env.VITE_REQUEST_QUEUE_LIMIT || 4,
     // axios 配置
     axiosConfig: {
         baseURL: 'http://127.0.0.1:3000/api/',
