@@ -11,13 +11,19 @@
         "format": "npx prettier --write \"src/**/*.{vue,js,ts,jsx,tsx}\""
     },
     "dependencies": {
+        "@arco-design/web-vue": "^2.56.3",
+        "@tendo-sect/web-utils": "^0.0.5",
         "axios": "^1.7.9",
+        "dayjs": "^1.11.13",
+        "echarts": "^5.6.0",
         "pinia": "^2.3.0",
+        "query-string": "^9.1.1",
         "vue": "^3.5.13",
+        "vue-echarts": "^7.0.3",
+        "vue-i18n": "^11.0.1",
         "vue-router": "^4.5.0"
     },
     "devDependencies": {
-        "@arco-design/web-vue": "^2.56.3",
         "@tsconfig/node22": "^22.0.0",
         "@types/node": "^22.10.2",
         "@vitejs/plugin-vue": "^5.2.1",
@@ -27,6 +33,7 @@
         "npm-run-all2": "^7.0.2",
         "postcss": "^8.4.49",
         "prettier": "3.4.2",
+        "sass": "^1.83.4",
         "tailwindcss": "^3.4.17",
         "terser": "^5.37.0",
         "typescript": "~5.6.3",
