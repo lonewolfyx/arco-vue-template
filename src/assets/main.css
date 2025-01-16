@@ -1,0 +1,7 @@
+html, body {
+    @apply w-full h-full m-0 p-0 text-sm antialiased bg-[#F1F1F4];
+}
+
+#app {
+    @apply relative w-full h-full;
+}
