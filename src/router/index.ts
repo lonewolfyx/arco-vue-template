@@ -1,6 +1,7 @@
 import {createRouter, createWebHistory} from 'vue-router';
 import {NOT_FOUND_ROUTE} from "@/router/routes";
 import {createRouteGuard} from "@/router/guard";
+import {AppRoutes} from "@/router/route";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -25,6 +26,7 @@ const router = createRouter({
                 requiresAuth: true,
             },
         },
+        ...AppRoutes,
         NOT_FOUND_ROUTE
     ],
 });
