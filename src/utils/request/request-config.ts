@@ -10,7 +10,7 @@ export default <RequestConfig>{
     requestLimit: import.meta.env.VITE_REQUEST_QUEUE_LIMIT || 4,
     // axios 配置
     axiosConfig: {
-        baseURL: 'http://127.0.0.1:3000/api/',
+        baseURL: import.meta.env.VITE_API_URL,
         timeout: 5000
     },
 }
