@@ -6,47 +6,63 @@ import type {
     Router
 } from "vue-router";
 import {useUserStore} from "@/stores";
+import {isLogin} from "@/utils";
+import {DEFAULT_HOME_ROUTE, UN_LOGIN_ROUTE} from "@/constants";
 
 
+/**
+ * 用户登录信息校验
+ * @param router
+ */
 export const setupUserLoginInfoGuard = (router: Router) => {
     router.beforeEach(async (to: RouteLocationNormalized, from: RouteLocationNormalizedLoaded, next: NavigationGuardNext) => {
-        console.log(to, from, next)
-        const isLogin = true;
-        const userInfo = useUserStore()
 
-        if (isLogin) {
-            // next()
+        const userStore = useUserStore()
+        console.log('是否已登录', isLogin())
+        if (isLogin()) {
 
-            if (userInfo.userRole) {
-                next()
-            } else {
-                console.log('没有角色')
-                try {
-                    await userInfo.getUserInfo()
-                    next()
-                } catch (error) {
-                    await userInfo.logout()
-
-                    next({
-                        name: 'login',
-                        query: {
-                            redirect: to.name,
-                            ...to.query,
-                        } as LocationQueryRaw,
-                    })
-                    console.log(error)
-                }
+            // 如果访问的是登录页面就直接返回首页
+            if (to.name === UN_LOGIN_ROUTE) {
+                next({
+                    name: DEFAULT_HOME_ROUTE
+                });
+                return;
             }
+
+            // 获取用户信息
+            await userStore.getUserInfo()
+
+            next()
+            // if (userInfo.userRole) {
+            //     next()
+            // } else {
+            //     console.log('没有角色')
+            //     try {
+            //         await userInfo.getUserInfo()
+            //         next()
+            //     } catch (error) {
+            //         await userInfo.logout()
+            //
+            //         next({
+            //             name: 'login',
+            //             query: {
+            //                 redirect: to.name,
+            //                 ...to.query,
+            //             } as LocationQueryRaw,
+            //         })
+            //         console.log(error)
+            //     }
+            // }
 
         } else {
             // 如果已经是登录页面就直接返回
-            if (to.name === 'login') {
+            if (to.name === UN_LOGIN_ROUTE) {
                 next();
                 return;
             }
 
             next({
-                name: 'login',
+                name: UN_LOGIN_ROUTE,
                 query: {
                     redirect: to.name,
                     ...to.query,

@@ -1,7 +1,9 @@
 import {defineStore} from "pinia";
 import {computed, ref} from "vue";
 import {UserState} from "@/stores/user/types";
-import {getUserInfoAPI, userLoginOut} from "@/api/user";
+import {getUserInfoAPI, userLogin as useUserLogin, userLoginOut} from "@/api/user";
+import {UserLoginParamsData} from "@/types";
+import {clearToken, setToken} from "@/utils";
 
 
 export const useUserStore = defineStore('user', () => {
@@ -46,6 +48,18 @@ export const useUserStore = defineStore('user', () => {
         }
     }
 
+    // 用户登录
+    const login = async (loginForm: UserLoginParamsData) => {
+        try {
+            const res = await useUserLogin(loginForm)
+            setToken(res.data.access_token)
+            console.log('用户store 的res', res)
+        } catch (error) {
+            clearToken()
+            throw error
+        }
+    }
+
     const logoutCallBack = () => {
         // TODO 清理当前的 token 值
         // TODO 清理当前存储的用户信息
@@ -58,6 +72,7 @@ export const useUserStore = defineStore('user', () => {
         userRole,
         userInfo,
         getUserInfo,
-        logout
+        logout,
+        login,
     }
 })
