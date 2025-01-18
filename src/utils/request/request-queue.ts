@@ -1,5 +1,14 @@
+type PromiseFunc<T> = () => Promise<T>;
+
+type QueueItem<T> = {
+    promiseFunc: PromiseFunc<T>;
+    resolve: (value: T | PromiseLike<T>) => void;
+    reject: (reason?: any) => void;
+};
+
+
 export class RequestQueue {
-    private queue: any[];
+    private queue: QueueItem<any>[];
     private currentCount: number;
     private readonly maxConcurrent: number;
 
@@ -9,7 +18,7 @@ export class RequestQueue {
         this.maxConcurrent = maxConcurrent;
     }
 
-    addRequest(promiseFunc: () => void) {
+    addRequest<T>(promiseFunc: PromiseFunc<T>): Promise<T> {
         return new Promise((resolve, reject) => {
             this.queue.push({promiseFunc, resolve, reject});
             this.runNext();
@@ -21,7 +30,8 @@ export class RequestQueue {
             return;
         }
 
-        const {promiseFunc, resolve, reject} = this.queue.shift();
+        const {promiseFunc, resolve, reject} = this.queue.shift()!;
+
         this.currentCount++;
 
         promiseFunc()
