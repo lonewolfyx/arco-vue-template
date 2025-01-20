@@ -17,5 +17,20 @@ export const AppRoutes: RouteRecordRaw[] = [
                 component: () => import('@/views/dashboard/workspace.vue')
             }
         ]
+    },
+    {
+        path: '/system',
+        name: 'system',
+        component: DEFAULT_LAYOUT,
+        meta: {
+            requiresAuth: true,
+        },
+        children: [
+            {
+                path: 'menu',
+                name: 'menu',
+                component: () => import('@/views/sys/menu/index.vue')
+            }
+        ]
     }
 ]
