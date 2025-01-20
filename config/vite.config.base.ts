@@ -15,6 +15,7 @@ export default defineConfig({
             imports: [
                 'vue',
                 'pinia',
+                'vue-router',
                 '@vueuse/core'
             ],
             dts: 'src/types/auto-imports.d.ts',
