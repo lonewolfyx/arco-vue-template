@@ -2,6 +2,7 @@ import axios, {AxiosResponse, InternalAxiosRequestConfig} from "axios";
 import requestConfig from "./request-config";
 import {Message} from "@arco-design/web-vue";
 import {setHeaderToken} from "@/utils/request/plugins/set.header.token";
+import {useUserStore} from "@/stores";
 
 const axiosService = axios.create(requestConfig.axiosConfig)
 
@@ -35,6 +36,18 @@ axiosService.interceptors.response.use(
     (res: AxiosResponse<any, any>) => {
 
         const code = res.data.code || 200;
+
+        // 账户过期
+        if (code === 401200) {
+            useUserStore().logout().then(() => {
+                Message.error({
+                    content: '登录状态已过期，请重新登录',
+                    duration: 5 * 1000,
+                });
+                window.location.href = '/login'
+            })
+            return Promise.reject(new Error(res.data.message))
+        }
 
         // 非 200 code 抛出异常
         if (code !== 200) {

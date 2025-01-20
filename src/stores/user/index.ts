@@ -53,7 +53,6 @@ export const useUserStore = defineStore('user', () => {
         try {
             const res = await useUserLogin(loginForm)
             setToken(res.data.access_token)
-            console.log('用户store 的res', res)
         } catch (error) {
             clearToken()
             throw error
@@ -61,8 +60,7 @@ export const useUserStore = defineStore('user', () => {
     }
 
     const logoutCallBack = () => {
-        // TODO 清理当前的 token 值
-        // TODO 清理当前存储的用户信息
+        clearToken()
         user.value.info = {};
         user.value.role = '';
     }
@@ -73,6 +71,6 @@ export const useUserStore = defineStore('user', () => {
         userInfo,
         getUserInfo,
         logout,
-        login,
+        login
     }
 })

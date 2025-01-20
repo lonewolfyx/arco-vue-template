@@ -18,7 +18,7 @@ export const setupUserLoginInfoGuard = (router: Router) => {
     router.beforeEach(async (to: RouteLocationNormalized, from: RouteLocationNormalizedLoaded, next: NavigationGuardNext) => {
 
         const userStore = useUserStore()
-        console.log('是否已登录', isLogin())
+        // console.log('是否已登录', isLogin())
         if (isLogin()) {
 
             // 如果访问的是登录页面就直接返回首页
