@@ -21,10 +21,10 @@
 import {ref} from "vue";
 import {useUserStore} from "@/stores";
 import {Message} from "@arco-design/web-vue";
-import {useRouter} from "vue-router";
 import {DEFAULT_REDIRECT_ROUTE} from "@/constants";
 
 const router = useRouter()
+const route = useRoute()
 
 const queryParams = ref<{ username: string; password: string }>({
     username: 'admin',
@@ -34,11 +34,12 @@ const queryParams = ref<{ username: string; password: string }>({
 const message = ref('')
 
 const handleSubmit = async () => {
+    const {redirect} = route.query as { redirect: string }
     try {
         const res = await useUserStore().login(queryParams.value)
         Message.info('登录成功')
         await router.push({
-            name: DEFAULT_REDIRECT_ROUTE
+            name: redirect ?? DEFAULT_REDIRECT_ROUTE
         })
     } catch (error) {
         message.value = (error as Error).message
