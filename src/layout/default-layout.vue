@@ -1,9 +1,9 @@
 <template>
-    <a-layout class="flex justify-center h-full">
+    <a-layout class="h-full">
         <PageHeader/>
         <a-layout>
             <SideBarNav/>
-            <a-layout-content class="p-3">
+            <a-layout-content class="p-5">
                 <PageLayout/>
             </a-layout-content>
         </a-layout>
