@@ -5,3 +5,7 @@ html, body {
 #app {
     @apply relative w-full h-full;
 }
+
+.app-container {
+    @apply relative w-full;
+}

@@ -8,8 +8,7 @@ import App from './App.vue';
 import '@arco-design/web-vue/dist/arco.css';
 import './assets/reset.css';
 import './assets/tailwind.css';
-
-import './assets/main.css';
+import './assets/main.scss';
 
 import router from './router';
 
