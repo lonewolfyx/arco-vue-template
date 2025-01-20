@@ -4,15 +4,16 @@ import {UserLoginParamsData} from "@/types";
 export const getUserInfoAPI = () => {
     return requestService({
         method: 'get',
-        url: '/user/info'
+        url: '/v1/user/info'
     })
 }
 
 export const userLoginOut = () => {
-    return requestService({
-        method: 'get',
-        url: '/user/loginOut'
-    })
+    // return requestService({
+    //     method: 'get',
+    //     url: '/v1/user/loginOut'
+    // })
+    return Promise.resolve()
 }
 
 /**
@@ -22,7 +23,7 @@ export const userLoginOut = () => {
 export const userLogin = (data: UserLoginParamsData): Promise<any> => {
     return requestService({
         method: 'post',
-        url: '/oauth/login',
+        url: '/v1/oauth/login',
         data
     })
 }
